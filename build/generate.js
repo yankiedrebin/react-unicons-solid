@@ -27,12 +27,9 @@ uniconsConfig.forEach((icon) => {
   const svgPath = $('path').attr('d');
 
   const template = `import React from 'react';
+import { Icon } from '../icon';
 
-const ${name}: React.FC<React.SVGAttributes<SVGElement> & { color?: string; size?: number | string }> = ({
-  color = 'currentColor',
-  size = '24',
-  ...otherProps
-}) => {
+const ${name}: Icon = ({ color = 'currentColor', size = '24', ...otherProps }) => {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg" {...otherProps}>
       <path d="${svgPath}" />

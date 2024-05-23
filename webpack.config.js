@@ -1,15 +1,30 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  entry: "./index.js",
+  entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, "lib", "cjs"),
-    filename: "index.js",
-    globalObject: "this",
-    libraryTarget: "umd",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
+    library: {
+      name: 'react-unicons-solid',
+      type: 'umd',
+    },
+    clean: true, // Clean the output directory before emit.
   },
-  externals: {
-    react: "react",
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
-  mode: "production",
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  optimization: {
+    usedExports: true, // Enable tree-shaking
+  },
+  mode: 'production', // Ensure minification and optimizations
 };

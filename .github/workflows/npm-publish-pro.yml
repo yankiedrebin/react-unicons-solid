@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: 10.16.3
+          node-version: '16.x'
       - name: Install NPM
         run: npm ci --progress=false
       - name: Set Gemfury Config
@@ -20,6 +20,6 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.FURY_AUTH_TOKEN }}
       - name: Download & Build Icons
-        run: npm i @iconscout/unicons@latest && npm run generate
+        run: npm i @iconscout/unicons@latest && npm run generate && npm run build
       - name: Publish to Gemfury
         run: npm publish
